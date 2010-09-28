@@ -1,9 +1,9 @@
-class Message
+class Characters
   def initialize(message)
     @characters = message.scan(/./)
   end
 
-  def cipher(&block)
+  def remap(&block)
     map_with_index(&block).join
   end
 

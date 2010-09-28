@@ -1,4 +1,4 @@
-require 'message'
+require 'characters'
 
 class SimpleLorenz
 
@@ -7,19 +7,20 @@ class SimpleLorenz
     @wheel2 = wheel2
   end
 
-  def cipher(message)
-    message = Message.new(message)
-    message.cipher do |character, index|
+  def encrypt(text)
+    message = Characters.new(text)
+    message.remap do |character, index|
       offset_character(character, offset(message, index))
     end
   end
 
-  def decipher(message)
-    message = Message.new(message)
-    decipher = ''
+  def decrypt(text)
+    encrypted_message = Characters.new(text)
+    message = ''
 
-    message.cipher do |character, i|
-      offset_character(character, -offset(Message.new(decipher), i)).tap { |c| decipher << c }
+    encrypted_message.remap do |character, i|
+      offset_character(character, -offset(Characters.new(message), i)).
+        tap { |c| message << c }
     end
   end
 
