@@ -1,31 +1,10 @@
+require 'message'
+
 class SimpleLorenz
 
-  CHARACTER_SET = [
-    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
-    "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", ".", ",", "?", "!", " "
-  ]
-
-  class Message
-    def initialize(message)
-      @characters = message.scan(/./)
-    end
-
-    def cipher(&block)
-      @characters.each_with_index.map do | character, index | 
-        block.call(character, index)
-      end.join
-    end
-
-    def previous_character(index)
-      if index == 0
-        previous_character = CHARACTER_SET.first
-      else
-        previous_character = characters[index - 1]
-      end
-    end
-
-    private
-    attr_reader :characters
+  def initialize(wheel1, wheel2)
+    @wheel1 = wheel1
+    @wheel2 = wheel2
   end
 
   def cipher(message)
@@ -35,15 +14,49 @@ class SimpleLorenz
     end
   end
 
+  class << self
+    attr_reader :alphabet, :multiplier
+
+    def [](alphabet, multiplier)
+      @alphabet = alphabet
+      @multiplier = multiplier
+    end
+  end
+
+  private
+
+  attr_reader :wheel1
+
+  def wheel2
+    @wheel2 * -multiplier
+  end
+
+  def alphabet
+    self.class.alphabet
+  end
+
+  def multiplier
+    self.class.multiplier
+  end
+
   def offset(message, index)
-    (position(message.previous_character(index)) * 2)
+    wheel1 + wheel2 + wheel3(message, index)
+  end
+
+  def wheel3(message, index)
+    position(previous_character(message,index)) * multiplier
   end
 
   def position(character)
-    CHARACTER_SET.index(character)
+    alphabet.index(character)
   end
 
   def offset_character(character, offset)
-    CHARACTER_SET[(position(character) + offset) % CHARACTER_SET.length]
+    alphabet[(position(character) + offset) % alphabet.length]
+  end
+
+  def previous_character(message, index)
+    return alphabet.first if index == 0
+    message.previous_character(index)
   end
 end
