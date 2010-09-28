@@ -17,28 +17,56 @@ describe 'a three wheel encryption mechanism' do
     let(:wheel1) { 0 }
     let(:wheel2) { 0 }
 
-    it "returns 'a' as 'a'" do
-      machine.cipher('a').should == 'a'
+    context 'when encoding' do
+      it "returns 'a' as 'a'" do
+        machine.cipher('a').should == 'a'
+      end
+
+      it "returns 'aa' as 'aa'" do
+        machine.cipher('aa').should == 'aa'
+      end
+
+      it "returns 'aaa' as 'aaa'" do
+        machine.cipher('aaa').should == 'aaa'
+      end
+
+      it "returns 'aba' as 'abc'" do
+        machine.cipher('aba').should == 'abc'
+      end
+
+      it "returns 'bbb' as 'bdd'" do
+        machine.cipher('bbb').should == 'bdd'
+      end
+
+      it "returns 'hello, world!' as 'hstcfywu,ooze'" do
+        machine.cipher('hello, world!').should == 'hstcfywu,ooze'
+      end
     end
 
-    it "returns 'aa' as 'aa'" do
-      machine.cipher('aa').should == 'aa'
-    end
+    context 'when decoding' do
+      it "returns 'a' as 'a'" do
+        machine.decipher('a').should == 'a'
+      end
 
-    it "returns 'aaa' as 'aaa'" do
-      machine.cipher('aaa').should == 'aaa'
-    end
+      it "returns 'aa' as 'aa'" do
+        machine.decipher('aa').should == 'aa'
+      end
 
-    it "returns 'aba' as 'abc'" do
-      machine.cipher('aba').should == 'abc'
-    end
+      it "returns 'aaa' as 'aaa'" do
+        machine.decipher('aaa').should == 'aaa'
+      end
 
-    it "returns 'bbb' as 'bdd'" do
-      machine.cipher('bbb').should == 'bdd'
-    end
+      it "returns 'abc' as " do'aba'
+        machine.decipher('abc').should == 'aba'
+      end
 
-    it "returns 'hello, world!' as ''" do
-      machine.cipher('hello, world!').should == 'hstcfywu,ooze'
+      it "returns 'bdd' as " do'bbb'
+        machine.decipher('bdd').should == 'bbb'
+      end
+
+      it "returns 'hstcfywu,ooze' as " do'hello, world!'
+        machine.decipher('hstcfywu,ooze').should == 'hello, world!'
+      end
     end
   end
 
@@ -46,28 +74,56 @@ describe 'a three wheel encryption mechanism' do
     let(:wheel1) { 1 }
     let(:wheel2) { 0 }
 
-    it "returns 'a' as 'b'" do
-      machine.cipher('a').should == 'b'
+    context 'when encoding' do
+      it "returns 'a' as 'b'" do
+        machine.cipher('a').should == 'b'
+      end
+
+      it "returns 'aa' as 'bb'" do
+        machine.cipher('aa').should == 'bb'
+      end
+
+      it "returns 'aaa' as 'bbb'" do
+        machine.cipher('aaa').should == 'bbb'
+      end
+
+      it "returns 'aba' as 'bcd'" do
+        machine.cipher('aba').should == 'bcd'
+      end
+
+      it "returns 'bbb' as 'cee'" do
+        machine.cipher('bbb').should == 'cee'
+      end
+
+      it "returns 'hello, world!' as 'itudgzxv?pp.f'" do
+        machine.cipher('hello, world!').should == 'itudgzxv?pp.f'
+      end
     end
 
-    it "returns 'aa' as 'bb'" do
-      machine.cipher('aa').should == 'bb'
-    end
+    context 'when decoding' do
+      it "returns 'b' as 'a'" do
+        machine.decipher('b').should == 'a'
+      end
 
-    it "returns 'aaa' as 'bbb'" do
-      machine.cipher('aaa').should == 'bbb'
-    end
+      it "returns 'bb' as 'aa'" do
+        machine.decipher('bb').should == 'aa'
+      end
 
-    it "returns 'aba' as 'bcd'" do
-      machine.cipher('aba').should == 'bcd'
-    end
+      it "returns 'bbb' as 'aaa'" do
+        machine.decipher('bbb').should == 'aaa'
+      end
 
-    it "returns 'bbb' as 'cee'" do
-      machine.cipher('bbb').should == 'cee'
-    end
+      it "returns 'bcd' as 'aba'" do
+        machine.decipher('bcd').should == 'aba'
+      end
 
-    it "returns 'hello, world!' as 'itudgzxv?pp.f'" do
-      machine.cipher('hello, world!').should == 'itudgzxv?pp.f'
+      it "returns 'cee' as 'bbb'" do
+        machine.decipher('cee').should == 'bbb'
+      end
+
+      it "returns 'itudgzxv?pp.f' as 'hello, world!'" do
+        machine.decipher('itudgzxv?pp.f').should == 'hello, world!'
+      end
     end
   end
 
@@ -75,28 +131,56 @@ describe 'a three wheel encryption mechanism' do
     let(:wheel1) { 1 }
     let(:wheel2) { 3 }
 
-    it "returns 'a' as '.'" do
-      machine.cipher('a').should == '.'
+    context 'when encoding' do
+      it "returns 'a' as '.'" do
+        machine.cipher('a').should == '.'
+      end
+
+      it "returns 'aa' as '..'" do
+        machine.cipher('aa').should == '..'
+      end
+
+      it "returns 'aaa' as '...'" do
+        machine.cipher('aaa').should == '...'
+      end
+
+      it "returns 'aba' as 'bcd'" do
+        machine.cipher('aba').should == '.,?'
+      end
+
+      it "returns 'bbb' as 'cee'" do
+        machine.cipher('bbb').should == ',!!'
+      end
+
+      it "returns 'hello, world!' as 'cno?atrpwjju '" do
+        machine.cipher('hello, world!').should == 'cno?atrpwjju '
+      end
     end
 
-    it "returns 'aa' as '..'" do
-      machine.cipher('aa').should == '..'
-    end
+    context 'when decoding' do
+      it "returns '.' as 'a'" do
+        machine.decipher('.').should == 'a'
+      end
 
-    it "returns 'aaa' as '...'" do
-      machine.cipher('aaa').should == '...'
-    end
+      it "returns '..' as 'aa'" do
+        machine.decipher('..').should == 'aa'
+      end
 
-    it "returns 'aba' as 'bcd'" do
-      machine.cipher('aba').should == '.,?'
-    end
+      it "returns '...' as 'aaa'" do
+        machine.decipher('...').should == 'aaa'
+      end
 
-    it "returns 'bbb' as 'cee'" do
-      machine.cipher('bbb').should == ',!!'
-    end
+      it "returns 'bcd' as 'aba'" do
+        machine.decipher('.,?').should == 'aba'
+      end
 
-    it "returns 'hello, world!' as 'itudgzxv?pp.f'" do
-      machine.cipher('hello, world!').should == 'cno?atrpwjju '
+      it "returns 'cee' as 'bbb'" do
+        machine.decipher(',!!').should == 'bbb'
+      end
+
+      it "returns 'cno?atrpwjju ' as 'hello, world!'" do
+        machine.decipher('cno?atrpwjju ').should == 'hello, world!'
+      end
     end
   end
 
@@ -113,10 +197,11 @@ describe 'a three wheel encryption mechanism' do
       ".", ",", "?", "!", "'", "\"", " "
     ] }
 
-    it "mary..." do
+    it "ciphers and deciphers a long message" do
       message = "Mary Had a little lamb who's fleece was white as snow!"
       cipher = %{I7qOkB'c4U"f!1NFz6fvly0qH,OiYZuzljh6qArYqHv186UrYmF6Gd}
       machine.cipher(message).should == cipher
+      machine.decipher(cipher).should == message
     end
   end
 end

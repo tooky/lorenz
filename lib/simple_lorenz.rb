@@ -14,6 +14,15 @@ class SimpleLorenz
     end
   end
 
+  def decipher(message)
+    message = Message.new(message)
+    decipher = ''
+
+    message.cipher do |character, i|
+      offset_character(character, -offset(Message.new(decipher), i)).tap { |c| decipher << c }
+    end
+  end
+
   class << self
     attr_reader :alphabet, :multiplier
 
