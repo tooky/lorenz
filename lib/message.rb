@@ -18,8 +18,7 @@ class Message
   end
 
   def <<(character)
-    characters << character
-    self
+    Message.new((characters.clone << character).join)
   end
 
   def to_s
