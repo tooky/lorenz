@@ -9,7 +9,7 @@ describe 'a three wheel encryption mechanism' do
   ] }
 
   before do
-    SimpleLorenz[character_set, 2]
+    SimpleLorenz[character_set, 2, 2]
   end
 
   context 'wheel 1 and 2 set to 0' do

@@ -23,11 +23,12 @@ class SimpleLorenz
   end
 
   class << self
-    attr_reader :alphabet, :multiplier
+    attr_reader :alphabet, :wheel2_multiplier, :wheel3_multiplier
 
-    def [](alphabet, multiplier)
+    def [](alphabet, wheel2_multiplier, wheel3_multiplier)
       @alphabet = Alphabet.new(alphabet)
-      @multiplier = multiplier
+      @wheel2_multiplier = wheel2_multiplier
+      @wheel3_multiplier = wheel3_multiplier
     end
   end
 
@@ -39,11 +40,11 @@ class SimpleLorenz
   attr_reader :wheel1
 
   def wheel2
-    @wheel2 * -multiplier
+    @wheel2 * -wheel2_multiplier
   end
 
   def wheel3(message, index)
-    alphabet.position(previous_character(message,index)) * multiplier
+    alphabet.position(previous_character(message,index)) * wheel3_multiplier
   end
 
   def previous_character(message, index)
@@ -63,7 +64,11 @@ class SimpleLorenz
     self.class.alphabet
   end
 
-  def multiplier
-    self.class.multiplier
+  def wheel2_multiplier
+    self.class.wheel2_multiplier
+  end
+
+  def wheel3_multiplier
+    self.class.wheel3_multiplier
   end
 end
