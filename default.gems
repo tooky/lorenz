@@ -1,0 +1,6 @@
+# default.gems generated gem export file. Note that any env variable settings will be missing. Append these after using a ';' field separator
+diff-lcs -v1.1.2
+rspec -v2.0.1
+rspec-core -v2.0.1
+rspec-expectations -v2.0.1
+rspec-mocks -v2.0.1
